@@ -1,0 +1,68 @@
+package org.firstinspires.ftc.teamcode.auto;
+//updated auto starting backwards
+
+import com.acmerobotics.dashboard.config.Config;
+import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
+import com.qualcomm.robotcore.hardware.DcMotor;
+
+import org.firstinspires.ftc.teamcode.movement;
+
+@Config
+@Autonomous(name="auto_red_obs")
+
+public static double = a01_d = 0;
+public static double = a02_r = 45;
+public static double = a03_d = 0;
+public static double = a04_ls = 0;
+public static double = a05_d = 0;
+public static double = a06_d = 0;
+public static double = a07_ls = 0;
+public static double = a08_r = 0;
+public static double = a09_d = 0;
+public static double = a10_d = 0;
+
+public class auto_red_obs extends LinearOpMode {
+    //sets up motors
+    DcMotor FR;
+    DcMotor FL;
+    DcMotor BR;
+    DcMotor BL;
+
+    @Override
+    public void runOpMode(){ //sets motors to correct modes and directions
+        FL = hardwareMap.get(DcMotor.class, "FL");
+        FR = hardwareMap.get(DcMotor.class,"FR");
+        BL = hardwareMap.get(DcMotor.class, "BL");
+        BR = hardwareMap.get(DcMotor.class, "BR");
+
+        FL.setDirection(DcMotor.Direction.REVERSE);
+        FR.setDirection(DcMotor.Direction.FORWARD);
+        BL.setDirection(DcMotor.Direction.REVERSE);
+        BR.setDirection(DcMotor.Direction.FORWARD);
+
+        FL.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        BL.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        FR.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        BR.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+
+
+        waitForStart();
+        //code to run autonomous
+
+        movement.backward(a01_d, telemetry, BL, BR, FL, FR);
+        movement.rotationRight(a02_r, telemetry, BL, BR, FL, FR);
+        movement.forward(a03_d, telemetry, BL, BR, FL, FR);
+        movement.LS_up(a04_ls, telemetry, LSL, LSR);
+        movement.forward(a05_d, telemetry, BL, BR, FL, FR);
+        //GK.setPower(1) //we need to import this at the top
+        //wait
+        //GK.setPower(0)
+        movement.backward(a06_d, telemetry, BL, BR, FL, FR);
+        movement.LS_down(a07_ls, telemetry, LSL, LSR);
+        movement.rotationLeft(a08_r, telemetry, BL, BR, FL, FR);
+        movement.left(a09_d, telemetry, BL, BR, FL, FR);
+        movement.forward(a10_d, telemetry, BL, BR, FL, FR);
+        
+    }
+}
